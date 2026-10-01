@@ -1,4 +1,4 @@
-package org.zero;
+package org.zero.regiontree;
 
 import org.jsoup.Jsoup;
 import org.jsoup.helper.HttpConnection;
@@ -6,11 +6,11 @@ import org.jsoup.internal.StringUtil;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.zero.model.City;
-import org.zero.model.County;
-import org.zero.model.Province;
-import org.zero.model.Town;
-import org.zero.model.Village;
+import org.zero.regiontree.model.City;
+import org.zero.regiontree.model.County;
+import org.zero.regiontree.model.Province;
+import org.zero.regiontree.model.Town;
+import org.zero.regiontree.model.Village;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -18,23 +18,25 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 /**
+ * 国家统计局「统计用区划代码和城乡划分代码」采集器，按 省 → 市 → 县 → 镇 → 村 逐级解析。
+ *
  * @author Zero
  */
-public class Reptile {
+public class RegionTreeCrawler {
     public static final String BASE_URL = "http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/";
     private static final Pattern URL_PATTERN = Pattern.compile("http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/\\d+/?[\\w&@#/%+=~\\-_|.]*");
 
     private String url;
 
-    public Reptile() {
+    public RegionTreeCrawler() {
         this(2021);
     }
 
-    public Reptile(int year) {
+    public RegionTreeCrawler(int year) {
         this(BASE_URL + year);
     }
 
-    public Reptile(String url) {
+    public RegionTreeCrawler(String url) {
         this.url = url;
     }
 

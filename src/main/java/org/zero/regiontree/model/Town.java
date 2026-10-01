@@ -1,4 +1,4 @@
-package org.zero.model;
+package org.zero.regiontree.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,13 +9,13 @@ import java.util.List;
 
 /**
  * @author Zero (cnzeropro@qq.com)
- * @date 2021/7/18 14:26
+ * @date 2021/7/18 14:30
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class City {
+public class Town {
     /**
      * 统计用区划代码
      */
@@ -25,11 +25,11 @@ public class City {
      */
     private String name;
     /**
-     * 下属区县url
+     * 下属乡村url
      */
     private String url;
     /**
-     * 下属区县
+     * 下属乡村
      */
-    private List<County> counties;
+    private List<Village> villages;
 }

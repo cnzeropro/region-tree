@@ -5,8 +5,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.zero</groupId>
-    <artifactId>crawler</artifactId>
+    <artifactId>region-tree</artifactId>
     <version>1.0.0</version>
+
+    <name>region-tree</name>
+    <description>国家统计局省/市/县/镇/村五级区划树采集与数据模型</description>
+    <url>https://github.com/cnzeropro/region-tree</url>
+
+    <scm>
+        <connection>scm:git:https://github.com/cnzeropro/region-tree.git</connection>
+        <developerConnection>scm:git:git@github.com:cnzeropro/region-tree.git</developerConnection>
+        <url>https://github.com/cnzeropro/region-tree</url>
+    </scm>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

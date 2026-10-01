@@ -1,9 +1,9 @@
-package org.zero;
+package org.zero.regiontree;
 
 import com.alibaba.fastjson2.JSON;
 import org.junit.Test;
-import org.zero.model.Province;
-import org.zero.model.Village;
+import org.zero.regiontree.model.Province;
+import org.zero.regiontree.model.Village;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,29 +15,29 @@ import java.util.List;
  * @author Zero (cnzeropro@qq.com)
  * @date 2021/7/18 13:59
  */
-public class ReptileTest {
-    Reptile reptile = new Reptile();
+public class RegionTreeCrawlerTest {
+    RegionTreeCrawler crawler = new RegionTreeCrawler();
 
     @Test
     public void test0() {
-        System.out.println(reptile.checkUrl("http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2020/11/01/11/110111002.html"));
+        System.out.println(crawler.checkUrl("http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2020/11/01/11/110111002.html"));
     }
 
     @Test
     public void test1() throws IOException {
-        List<Province> provinces = reptile.getProvinces();
+        List<Province> provinces = crawler.getProvinces();
         provinces.forEach(province -> {
             System.out.println("省：" + province.getName());
-            province.setCities(reptile.getCities(province.getUrl()));
+            province.setCities(crawler.getCities(province.getUrl()));
             province.getCities().forEach(city -> {
                 System.out.println(" 城：" + city.getName());
-                city.setCounties(reptile.getCounties(city.getUrl()));
+                city.setCounties(crawler.getCounties(city.getUrl()));
                 city.getCounties().forEach(county -> {
                     System.out.println("  县：" + county.getName());
-                    county.setTowns(reptile.getTowns(county.getUrl()));
+                    county.setTowns(crawler.getTowns(county.getUrl()));
                     county.getTowns().forEach(town -> {
                         System.out.println("   镇：" + town.getName());
-                        town.setVillages(reptile.getVillages(town.getUrl()));
+                        town.setVillages(crawler.getVillages(town.getUrl()));
                         try {
                             Thread.sleep(1500);
                         } catch (InterruptedException e) {
@@ -85,7 +85,7 @@ public class ReptileTest {
 
     @Test
     public void test2() throws IOException {
-        List<Village> villages = reptile.getVillages("http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2020/11/01/11/110111002.html");
+        List<Village> villages = crawler.getVillages("http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/2020/11/01/11/110111002.html");
         villages.forEach(System.out::println);
         String jsonStr = JSON.toJSONString(villages);
         try (PrintWriter writer = new PrintWriter(Files.newOutputStream(Paths.get("info.json")));) {
